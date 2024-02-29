@@ -80,13 +80,25 @@ WSGI_APPLICATION = 'WorkFlowMgmt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# HOME DATABASE
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'WorkFlow',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Kaktusik123',
+#         'HOST': 'localhost',
+#     }
+# }
+
+
+#WORK DATABASE
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'WorkFlow',
-        'USER': 'postgres',
-        'PASSWORD': 'Kaktusik123',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
