@@ -22,13 +22,24 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Baza Dnaych</a>
+                <a class="nav-link active" aria-current="page" href="#">Baza Danych</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Awarie</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Zadania</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Twoi Pracownicy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Wszyscy użytkownicy</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'profiles:profile'%}">Witaj {{ request.user.get_full_name }}</a>
               </li>
             </ul>
           </div>
