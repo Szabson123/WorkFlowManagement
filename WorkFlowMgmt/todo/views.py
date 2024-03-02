@@ -10,5 +10,5 @@ class TaskListView(ListView):
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        Task.objects.filter()
+        Task.objects.filter(assignet_to__in=[self.request.user])
 

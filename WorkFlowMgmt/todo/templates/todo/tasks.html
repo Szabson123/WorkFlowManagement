@@ -1,0 +1,12 @@
+{% extends "base/base.html" %}
+{% block content %}
+
+{% for task in tasks %}
+
+<p>{{ task.name }}</p>
+
+{% empty %}
+<p>Nie masz żadnych zadań</p>
+{% endfor %}
+
+{% endblock %}
