@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'base',
     'database',
     'profiles',
+    'todo'
 ]
 
 MIDDLEWARE = [
