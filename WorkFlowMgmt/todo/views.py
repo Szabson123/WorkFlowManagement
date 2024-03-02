@@ -6,9 +6,9 @@ from base.models import Task
 
 class TaskListView(ListView):
     model = Task
-    template_name = 'todo/tasks'
+    template_name = 'todo/tasks.html'
     context_object_name = 'tasks'
 
     def get_queryset(self):
-        Task.objects.filter(assignet_to__in=[self.request.user])
+        Task.objects.filter(assigned_to__in=[self.request.user])
 
