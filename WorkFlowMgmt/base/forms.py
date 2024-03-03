@@ -15,3 +15,6 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['name', 'description', 'priority', 'assigned_to']
+        widgets = {
+            'assigned_to': forms.SelectMultiple(),
+        }
