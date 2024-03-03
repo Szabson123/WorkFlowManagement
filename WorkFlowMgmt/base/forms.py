@@ -14,4 +14,4 @@ class UserForm(UserCreationForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['name', 'description', 'priority']
+        fields = ['name', 'description', 'priority', 'assigned_to']
