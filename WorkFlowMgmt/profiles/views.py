@@ -14,8 +14,8 @@ class ProfileView(DetailView):
     template_name = 'profiles/profile.html'
     
     def get_object(self, *args, **kwargs):
-        profile = get_object_or_404(Profile, user=self.request.user)
-        print(profile.id)
+        pk = self.kwargs.get('pk')
+        profile = get_object_or_404(Profile, pk=pk)
         return profile
     
     

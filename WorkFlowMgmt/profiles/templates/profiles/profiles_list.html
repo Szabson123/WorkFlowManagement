@@ -10,7 +10,7 @@
 <h1>Lista Pracowników</h1>
 
 {% for profile, groups in profile_groups %}
-    <li>{{ profile.user.get_full_name }} {{profile.number}}
+    <li>{{ profile.user.get_full_name }} <a href="{% url 'profiles:profile_detail' pk=profile.pk %}">Zobacz profil</a>
         <ul>
             {% for group in groups %}
                 <li>{{ group.name }}</li>
