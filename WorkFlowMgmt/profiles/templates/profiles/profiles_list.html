@@ -2,9 +2,22 @@
 {% block content %}
 
 <h1>Lista Pracowników</h1>
+<form method="get">
+    <label for="search">Szukaj pracownika:</label>
+    <input type="text" name="search" id="search" value="{{ request.GET.search }}" placeholder="Imię lub nazwisko">
+    <button type="submit">Szukaj</button>
+</form>
 
-{% for profile in profiles %}
-    <li>{{ profile.user.get_full_name }} {{profile.number}}</li>
+<h1>Lista Pracowników</h1>
+
+{% for profile, groups in profile_groups %}
+    <li>{{ profile.user.get_full_name }} {{profile.number}}
+        <ul>
+            {% for group in groups %}
+                <li>{{ group.name }}</li>
+            {% endfor %}
+        </ul>
+    </li>
 {% empty %}
 <p>Nie ma tutaj żadnych pracowników</p>
 {% endfor %}
