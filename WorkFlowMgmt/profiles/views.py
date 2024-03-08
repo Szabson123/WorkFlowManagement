@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.db.models import Q
 
-from base.models import Profile
+from base.models import Profile, User
 
 
 def main_page(request):
@@ -14,7 +14,9 @@ class ProfileView(DetailView):
     template_name = 'profiles/profile.html'
     
     def get_object(self, *args, **kwargs):
-        return get_object_or_404(Profile, user=self.request.user)
+        profile = get_object_or_404(Profile, user=self.request.user)
+        print(profile.id)
+        return profile
     
     
 class ProfileListView(ListView):
@@ -40,13 +42,14 @@ class ProfileListView(ListView):
 
 
 class YourEmployeesListView(ListView):
-    template_name = 'profiles/your_employees.html'
     model = Profile
+    template_name = 'profiles/your_employees.html'
     context_object_name = 'employees'
 
     def get_queryset(self):
-        profile_id = self.kwargs.get('profile_id')
-        owner_profile = get_object_or_404(Profile, id=profile_id)
+        user_profile = self.request.user.profile
+        return user_profile.your_employees.all()
 
-        return Profile.objects.filter(user__in=owner_profile.your_employees.all())
+
+
     

@@ -3,11 +3,12 @@
 
 <h1>Twoi Pracownicy:</h1>
 
-{% for employee in employees %}
 <ul>
-    <li>{{ employee.user.get_full_name }}</li>
-</ul>
+{% for employee in employees %}
+    <li>{{ employee.get_full_name }}</li>
 {% empty %}
-<p>Nie masz żadnych pracowników</p>
+    <p>Nie masz żadnych pracowników</p>
 {% endfor %}
+</ul>
+
 {% endblock %}

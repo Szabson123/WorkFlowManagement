@@ -31,13 +31,10 @@
                 <a class="nav-link active" aria-current="page" href="#">Zadania</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Twoi Pracownicy</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'profiles:your_employees' %}">Twoi Pracownicy</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'profiles:profiles_list' %}">Wszyscy użytkownicy</a>
-              </li>
-              <li>
-                <a class="nav-link active" aria-current="page" href="{% url 'profiles:your_employees' profile_id=request.user.profile.id %}">Zobacz moich pracowników</a>
               </li>
             </ul>
             <ul class="navbar-nav ms-auto">
