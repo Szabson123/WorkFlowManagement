@@ -37,5 +37,16 @@ class ProfileListView(ListView):
         context['profile_groups'] = [(profile, profile.user.groups.all()) for profile in context['profiles']]
         profiles = context['profiles']
         return context
-    
+
+
+class YourEmployeesListView(ListView):
+    template_name = 'profiles/your_employees.html'
+    model = Profile
+    context_object_name = 'employees'
+
+    def get_queryset(self):
+        profile_id = self.kwargs.get('profile_id')
+        owner_profile = get_object_or_404(Profile, id=profile_id)
+
+        return Profile.objects.filter(user__in=owner_profile.your_employees.all())
     

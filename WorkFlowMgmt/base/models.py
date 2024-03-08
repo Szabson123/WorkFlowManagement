@@ -14,6 +14,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     email = models.EmailField(null=True, blank=True)
     number = models.DecimalField(decimal_places=0, max_digits=11, null=True, blank=True)
+    your_employees = models.ManyToManyField(User, blank=True, related_name='your_employees')
 
     def __str__(self):
         return f'{self.user}'

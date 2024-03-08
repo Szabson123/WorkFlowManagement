@@ -36,6 +36,9 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'profiles:profiles_list' %}">Wszyscy użytkownicy</a>
               </li>
+              <li>
+                <a class="nav-link active" aria-current="page" href="{% url 'profiles:your_employees' profile_id=request.user.profile.id %}">Zobacz moich pracowników</a>
+              </li>
             </ul>
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
