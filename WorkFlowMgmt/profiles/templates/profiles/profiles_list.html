@@ -21,4 +21,8 @@
 {% empty %}
 <p>Nie ma tutaj żadnych pracowników</p>
 {% endfor %}
+
+{% if "Manager" in group_names %}
+    <p>Jesteś managerem</p>
+{% endif %}
 {% endblock %}

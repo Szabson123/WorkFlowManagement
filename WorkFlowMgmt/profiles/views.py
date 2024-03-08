@@ -27,8 +27,8 @@ class ProfileListView(ListView):
         search_query = self.request.GET.get('search', None)
         if search_query:
             queryset = queryset.filter(
-                Q(user__first_name__iscontains=search_query) |
-                Q(user__last_name__iscontains=search_query)
+                Q(user__first_name__icontains=search_query) |
+                Q(user__last_name__icontains=search_query)
             )
         return queryset
 
