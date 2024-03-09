@@ -31,3 +31,19 @@ class Task(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class MachineDatabase(models.Model):
+    name = models.CharField(max_length=255)
+    documentations = models.TextField()
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class MachineHistory(models.Model):
+    name = models.OneToOneField(MachineDatabase, on_delete=models.CASCADE)
+    changes = models.TextField()
+    modification = models.TextField()
+    fixes = models.TextField()
+    photos = models.ImageField()
