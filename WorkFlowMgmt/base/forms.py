@@ -20,6 +20,12 @@ class TaskForm(forms.ModelForm):
         }
 
 
+class MachineCreateForm(forms.ModelForm):
+    class Meta:
+        model = MachineHistory
+        fields = ['name', 'documentations']
+
+
 class MachineModificationForm(forms.ModelForm):
     class Meta:
         model = MachineHistory
