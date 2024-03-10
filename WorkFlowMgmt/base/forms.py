@@ -22,7 +22,7 @@ class TaskForm(forms.ModelForm):
 
 class MachineCreateForm(forms.ModelForm):
     class Meta:
-        model = MachineHistory
+        model = MachineDatabase
         fields = ['name', 'documentations']
 
 
