@@ -74,6 +74,7 @@ class MachineModificationCreateView(CreateView):
 class MachineModyficationDetailView(DetailView):
     template_name = 'database/modyfication_detail.html'
     model = MachineHistory
+    context_object_name = 'modification'
     
     def get_object(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
