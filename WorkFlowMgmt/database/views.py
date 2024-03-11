@@ -68,11 +68,11 @@ class MachineModificationCreateView(CreateView):
         return super().form_valid(form)
     
     def get_success_url(self) -> str:
-        return reverse('database:modyfication_list')
+        return reverse('database:modyfications_list')
     
 
 class MachineModyficationDetailView(DetailView):
-    template_name = 'database/modyfiaction_detail.html'
+    template_name = 'database/modyfication_detail.html'
     model = MachineHistory
     
     def get_object(self, *args, **kwargs):

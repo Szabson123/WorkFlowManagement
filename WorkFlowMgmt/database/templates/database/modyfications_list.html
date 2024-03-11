@@ -10,7 +10,7 @@
   {% for modyfication in modyfications %}
     <ul>
       <li>
-        <a href="{% url 'database:modyfication_detail' pk=modyfication.pk %}">
+        <a href="{% url 'database:modyfication_detail' pk=machine.pk modyfication_pk=modyfication.pk %}">
           {{ modyfication.name }}
         </a>
       </li>
