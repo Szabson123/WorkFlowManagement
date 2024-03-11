@@ -35,7 +35,10 @@ class Task(models.Model):
 
 class MachineDatabase(models.Model):
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
     documentations = models.TextField(blank=True, null=True)
+    
 
     def __str__(self):
         return f'{self.name}'

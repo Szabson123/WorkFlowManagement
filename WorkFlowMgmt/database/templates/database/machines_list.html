@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
+{% block content %}
 
-</body>
-</html>
+
+<h1>Lista Maszyn w Firmie</h1>
+<p><a href="{% url 'database:create_machine' %}">Dodaj maszyne</a></p>
+
+{% for machine in machines %}
+    <ul>
+        <li>
+            <a href="{% url 'database:machine_detail' pk=machine.pk %}">
+                {{ machine.name }}
+            </a>
+            {{ machine.documentations }}
+        </li>
+    </ul>
+{% empty %}
+    <p>Nie ma żadnych maszyn do wyświetlenia</p>
+{% endfor %}
+
+{% endblock %}
