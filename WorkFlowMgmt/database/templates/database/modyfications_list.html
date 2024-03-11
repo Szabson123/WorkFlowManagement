@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
+{% block content %}
 
-</body>
-</html>
+  <h1>Lista Modyfikacji w Firmie</h1>
+  
+  {% if machine %}
+    <p><a href="{% url 'database:create_modyfications' pk=machine.pk %}">Create Modification</a></p>
+  {% endif %}
+  
+  {% for modyfication in modyfications %}
+    <ul>
+      <li>
+        <a href="{% url 'database:modyfication_detail' pk=modyfication.pk %}">
+          {{ modyfication.name }}
+        </a>
+      </li>
+    </ul>
+  {% empty %}
+    <p>Nie ma żadnych modyfikacji do wyświetlenia</p>
+  {% endfor %}
+
+{% endblock %}

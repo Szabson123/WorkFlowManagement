@@ -152,3 +152,6 @@ LOGIN_REDIRECT_URL = 'profiles/main_page/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'base/static')
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'base', 'media')

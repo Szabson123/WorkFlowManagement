@@ -1,6 +1,8 @@
 from typing import Any
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
+from django.forms import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render, reverse, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 
@@ -39,3 +41,41 @@ class MachineDetailView(DetailView):
         pk = self.kwargs.get('pk')
         machine = get_object_or_404(MachineDatabase, pk=pk)
         return machine
+    
+    
+class MachineModificationListView(ListView):
+    template_name = 'database/modyfications_list.html'
+    model = MachineHistory
+    context_object_name = 'modyfications'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        machine = get_object_or_404(MachineDatabase, pk=pk)
+        context['machine'] = machine
+        return context
+    
+    def get_queryset(self):
+        return MachineHistory.objects.all()
+    
+
+class MachineModificationCreateView(CreateView):
+    template_name = 'database/create_modyfication.html'
+    model = MachineHistory
+    form_class = MachineModificationForm
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+    def get_success_url(self) -> str:
+        return reverse('database:modyfication_list')
+    
+
+class MachineModyficationDetailView(DetailView):
+    template_name = 'database/modyfiaction_detail.html'
+    model = MachineHistory
+    
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        modyfication = get_object_or_404(MachineHistory, pk=pk)
+        return modyfication
