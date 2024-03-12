@@ -69,7 +69,7 @@ class MachineModificationCreateView(CreateView):
         return super().form_valid(form)
     
     def get_success_url(self) -> str:
-        return reverse('database:modyfications_list')
+        return reverse('database:database')
     
 
 class MachineModyficationDetailView(DetailView):

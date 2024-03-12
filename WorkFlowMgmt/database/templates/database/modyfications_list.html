@@ -11,12 +11,12 @@
     <ul>
       <li>
         <a href="{% url 'database:modyfication_detail' pk=machine.pk modyfication_pk=modyfication.pk %}">
-          {{ modyfication.name }}
+          {{ modyfication.machine.name }}
         </a>
       </li>
     </ul>
-  {% empty %}
+{% empty %}
     <p>Nie ma żadnych modyfikacji do wyświetlenia</p>
-  {% endfor %}
+{% endfor %}
 
 {% endblock %}
