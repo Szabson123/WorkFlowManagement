@@ -12,6 +12,10 @@
                 {{ machine.name }}
             </a>
             {{ machine.documentations }}
+            {{ machine.description }}
+            {% if machine.image %}
+            <img src="{{ machine.image.url }}" alt="">
+            {% endif %}
         </li>
     </ul>
 {% empty %}
