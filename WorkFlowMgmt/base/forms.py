@@ -29,7 +29,7 @@ class MachineCreateForm(forms.ModelForm):
 class MachineModificationForm(forms.ModelForm):
     class Meta:
         model = MachineHistory
-        fields = ['modification', 'photos']
+        fields = ['name','modification', 'photos']
 
 
 class MachineChangesForm(forms.ModelForm):

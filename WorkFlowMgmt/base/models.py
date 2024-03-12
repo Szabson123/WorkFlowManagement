@@ -45,6 +45,10 @@ class MachineDatabase(models.Model):
 
 class MachineHistory(models.Model):
     machine = models.ForeignKey(MachineDatabase, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    time = models.DateTimeField(blank=True, null=True)
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    
     changes = models.TextField(blank=True, null=True)
     modification = models.TextField(blank=True, null=True)
     fixes = models.TextField(blank=True, null=True)

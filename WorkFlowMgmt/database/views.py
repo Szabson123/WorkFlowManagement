@@ -5,6 +5,7 @@ from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, reverse, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.utils import timezone
 
 from base.models import MachineDatabase, MachineHistory
 from base.forms import (MachineCreateForm, MachineModificationForm,
@@ -66,6 +67,12 @@ class MachineModificationCreateView(CreateView):
     form_class = MachineModificationForm
     
     def form_valid(self, form):
+        machine_pk = self.kwargs.get('pk')
+        machine = get_object_or_404(MachineDatabase, pk=machine_pk)
+        
+        form.instance.machine = machine
+        form.instance.author = self.request.user
+        form.instance.time = timezone.now()
         return super().form_valid(form)
     
     def get_success_url(self) -> str:
@@ -81,3 +88,4 @@ class MachineModyficationDetailView(DetailView):
         pk = self.kwargs.get('pk')
         modyfication = get_object_or_404(MachineHistory, pk=pk)
         return modyfication
+    
