@@ -30,19 +30,19 @@ class MachineModificationForm(forms.ModelForm):
     name = forms.ModelChoiceField(queryset=MachineDatabase.objects.all(), empty_label=None)
     class Meta:
         model = MachineHistory
-        fields = ['name', 'modification', 'photos']
+        fields = ['modification', 'photos']
 
 
 class MachineChangesForm(forms.ModelForm):
     name = forms.ModelChoiceField(queryset=MachineDatabase.objects.all(), empty_label=None)
     class Meta:
         model = MachineHistory
-        fields = ['name', 'changes', 'photos']
+        fields = ['changes', 'photos']
 
 
 class MachineFixesForm(forms.ModelForm):
     name = forms.ModelChoiceField(queryset=MachineDatabase.objects.all(), empty_label=None)
     class Meta:
         model = MachineHistory
-        fields = ['name', 'fixes', 'photos']
+        fields = ['fixes', 'photos']
 

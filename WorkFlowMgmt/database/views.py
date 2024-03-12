@@ -56,7 +56,8 @@ class MachineModificationListView(ListView):
         return context
     
     def get_queryset(self):
-        return MachineHistory.objects.all()
+        machine_pk = self.kwargs.get('pk')
+        return MachineHistory.objects.filter(machine__pk=machine_pk)
     
 
 class MachineModificationCreateView(CreateView):

@@ -44,8 +44,8 @@ class MachineDatabase(models.Model):
 
 
 class MachineHistory(models.Model):
-    name = models.OneToOneField(MachineDatabase, on_delete=models.CASCADE)
+    machine = models.ForeignKey(MachineDatabase, on_delete=models.CASCADE, null=True, blank=True)
     changes = models.TextField()
     modification = models.TextField()
     fixes = models.TextField()
-    photos = models.ImageField()
+    photos = models.ImageField(blank=True, null=True)

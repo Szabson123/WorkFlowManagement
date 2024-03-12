@@ -22,8 +22,15 @@
                             <h5 class="card-title">
                                 <a href="{% url 'database:machine_detail' pk=machine.pk %}">{{ machine.name }}</a>
                             </h5>
-                            <p class="card-text">{{ machine.description }}</p>
+                            <p class="card-text">{{ machine.description|truncatechars:40 }}</p>
                             <p class="card-text"><small class="text-muted">{{ machine.documentations }}</small></p>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn-group" role="group" aria-label="Machine Actions">
+                                    <a href="{% url 'database:machine_modification_list' pk=machine.pk %}" class="btn btn-secondary">Modifications</a>
+                                    <a href="#" class="btn btn-secondary">Fixes</a>
+                                    <a href="#" class="btn btn-secondary">Changes</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
