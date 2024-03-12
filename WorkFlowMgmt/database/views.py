@@ -84,8 +84,6 @@ class MachineModyficationDetailView(DetailView):
     model = MachineHistory
     context_object_name = 'modification'
     
-    def get_object(self, *args, **kwargs):
-        pk = self.kwargs.get('pk')
-        modyfication = get_object_or_404(MachineHistory, pk=pk)
-        return modyfication
-    
+    def get_object(self):
+        modyfication_pk = self.kwargs.get('modyfication_pk')
+        return get_object_or_404(MachineHistory, pk=modyfication_pk)
