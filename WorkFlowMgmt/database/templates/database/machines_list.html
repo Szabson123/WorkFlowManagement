@@ -1,25 +1,38 @@
 {% extends 'base/base.html' %}
 {% block content %}
 
+<div class="container">
+    <h1 class="mt-5">Lista Maszyn w Firmie</h1>
+    <p><a href="{% url 'database:create_machine' %}" class="btn btn-primary">Dodaj maszynę</a></p>
 
-<h1>Lista Maszyn w Firmie</h1>
-<p><a href="{% url 'database:create_machine' %}">Dodaj maszyne</a></p>
-
-{% for machine in machines %}
-    <ul>
-        <li>
-            <a href="{% url 'database:machine_detail' pk=machine.pk %}">
-                {{ machine.name }}
-            </a>
-            {{ machine.documentations }}
-            {{ machine.description }}
-            {% if machine.image %}
-            <img src="{{ machine.image.url }}" alt="">
-            {% endif %}
-        </li>
-    </ul>
-{% empty %}
-    <p>Nie ma żadnych maszyn do wyświetlenia</p>
-{% endfor %}
+    <div class="row">
+        {% for machine in machines %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-auto">
+                            {% if machine.image %}
+                            <img src="{{ machine.image.url }}" alt="{{ machine.name }}" class="img-fluid" style="max-height: 100px;">
+                            {% else %}
+                            <div class="placeholder-image" style="width: 100px; height: 100px; background-color: #ccc;"></div>
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            <h5 class="card-title">
+                                <a href="{% url 'database:machine_detail' pk=machine.pk %}">{{ machine.name }}</a>
+                            </h5>
+                            <p class="card-text">{{ machine.description }}</p>
+                            <p class="card-text"><small class="text-muted">{{ machine.documentations }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="col">Nie ma żadnych maszyn do wyświetlenia</p>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

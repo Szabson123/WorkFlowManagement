@@ -36,7 +36,7 @@ class Task(models.Model):
 class MachineDatabase(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    image = models.ImageField(blank=True, null=True, upload_to='images/')
+    image = models.ImageField(blank=True, null=True, upload_to='machines_images/')
     documentations = models.TextField(blank=True, null=True)
 
     def __str__(self):
