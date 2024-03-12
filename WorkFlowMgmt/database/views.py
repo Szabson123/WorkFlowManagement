@@ -87,3 +87,48 @@ class MachineModyficationDetailView(DetailView):
     def get_object(self):
         modyfication_pk = self.kwargs.get('modyfication_pk')
         return get_object_or_404(MachineHistory, pk=modyfication_pk)
+    
+    
+class MachineFixesListView(ListView):
+    template_name = 'database/fixes_list'
+    model = MachineHistory
+    context_object_name = 'fixes'
+    
+    def get_queryset(self):
+        machine_pk = self.kwargs.get('pk')
+        return MachineHistory.objects.filter(machine__pk= machine_pk)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        machine = get_object_or_404(MachineDatabase, pk=pk)
+        context['machine'] = machine
+        return context
+    
+    
+class MachineFixesCreateView(CreateView):
+    template_name = 'database/create_fix'
+    model = MachineHistory
+    
+    def form_valid(self, form):
+        machine_pk = self.kwargs.get('pk')
+        machine = get_object_or_404(MachineHistory, pk=machine_pk)
+        
+        form.instance.author = self.request.user
+        form.instace.time = timezone.now()
+        form.instance.machine = machine
+        
+        return super().form_valid(form)
+    
+    def get_success_url(self) -> str:
+        return reverse('dataabse:database')
+    
+
+class MachineFixesDetailView(DetailView):
+    template_name = 'database/fix_detail'
+    model = MachineHistory
+    contex_object_name = 'fixes'
+    
+    def get_object(self):
+        fix_pk = self.kwargs.get('fix_pk')
+        return get_object_or_404(MachineHistory, pk=fix_pk)
