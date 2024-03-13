@@ -133,3 +133,48 @@ class MachineFixesDetailView(DetailView):
     def get_object(self):
         fix_pk = self.kwargs.get('fix_pk')
         return get_object_or_404(MachineFixes, pk=fix_pk)
+    
+    
+class MachineChangesListView(ListView):
+    template_name = 'database/changes_list.html'
+    model = MachineChanges
+    context_object_name = 'changes'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        machine = get_object_or_404(MachineDatabase, pk=pk)
+        context['machine'] = machine
+        return machine
+    
+    def get_queryset(self):
+        machine_pk = self.kwargs.get('pk')
+        return MachineChanges.objects.filter(machine__pk=machine_pk)
+    
+
+class MachineChangesCreateView(CreateView):
+    template_name = 'database/create_change.html'
+    model = MachineChanges
+    
+    def form_valid(self, form):
+        machine_pk = self.kwargs.get('pk')
+        machine = get_object_or_404(MachineDatabase, pk=machine_pk)
+        
+        form.instance.machine = machine
+        form.instance.time = timezone.now()
+        form.instance.author = self.request.user
+        
+        return super().form_valid(form)
+    
+    def get_success_url(self) -> str:
+        return reverse('database:database')
+    
+
+class MachineChangesDetailView(DetailView):
+    template_name = 'database/change_detail.html'
+    model = MachineChanges
+    context_object_name = 'change'
+    
+    def get_object(self):
+        change_pk = self.kwargs.get('change_pk')
+        return get_object_or_404(MachineChanges, pk=change_pk) 
