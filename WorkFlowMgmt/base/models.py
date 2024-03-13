@@ -43,14 +43,37 @@ class MachineDatabase(models.Model):
         return f'{self.name}'
 
 
-class MachineHistory(models.Model):
+class MachineModifications(models.Model):
     machine = models.ForeignKey(MachineDatabase, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     time = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     photos = models.ImageField(blank=True, null=True, upload_to='modification_images/')
-    
-    changes = models.TextField(blank=True, null=True)
     modification = models.TextField(blank=True, null=True)
-    fixes = models.TextField(blank=True, null=True)
+    
+    def __str__(self):
+        return f'{self.name}'    
 
+
+class MachineFixes(models.Model):
+    machine = models.ForeignKey(MachineDatabase, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    time = models.DateTimeField(blank=True, null=True)
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    photos = models.ImageField(blank=True, null=True, upload_to='machine_images/')
+    fixes = models.TextField(blank=True, null=True)
+    
+    def __str__(self):
+        return f'{self.name}'    
+    
+    
+class MachineChanges(models.Model):
+    machine = models.ForeignKey(MachineDatabase, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    time = models.DateTimeField(blank=True, null=True)
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    photos = models.ImageField(blank=True, null=True, upload_to='changes_images/')
+    changes = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.name}'

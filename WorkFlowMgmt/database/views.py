@@ -7,7 +7,7 @@ from django.shortcuts import render, reverse, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.utils import timezone
 
-from base.models import MachineDatabase, MachineHistory
+from base.models import MachineDatabase, MachineChanges, MachineFixes, MachineModifications
 from base.forms import (MachineCreateForm, MachineModificationForm,
                         MachineFixesForm, MachineChangesForm)
 
@@ -46,7 +46,7 @@ class MachineDetailView(DetailView):
     
 class MachineModificationListView(ListView):
     template_name = 'database/modyfications_list.html'
-    model = MachineHistory
+    model = MachineModifications
     context_object_name = 'modyfications'
     
     def get_context_data(self, **kwargs):
@@ -58,12 +58,12 @@ class MachineModificationListView(ListView):
     
     def get_queryset(self):
         machine_pk = self.kwargs.get('pk')
-        return MachineHistory.objects.filter(machine__pk=machine_pk)
+        return MachineModifications.objects.filter(machine__pk=machine_pk)
     
 
 class MachineModificationCreateView(CreateView):
     template_name = 'database/create_modyfication.html'
-    model = MachineHistory
+    model = MachineModifications
     form_class = MachineModificationForm
     
     def form_valid(self, form):
@@ -81,22 +81,22 @@ class MachineModificationCreateView(CreateView):
 
 class MachineModyficationDetailView(DetailView):
     template_name = 'database/modyfication_detail.html'
-    model = MachineHistory
+    model = MachineModifications
     context_object_name = 'modification'
     
     def get_object(self):
         modyfication_pk = self.kwargs.get('modyfication_pk')
-        return get_object_or_404(MachineHistory, pk=modyfication_pk)
+        return get_object_or_404(MachineModifications, pk=modyfication_pk)
     
     
 class MachineFixesListView(ListView):
     template_name = 'database/fixes_list.html'
-    model = MachineHistory
+    model = MachineFixes
     context_object_name = 'fixes'
     
     def get_queryset(self):
         machine_pk = self.kwargs.get('pk')
-        return MachineHistory.objects.filter(machine__pk= machine_pk)
+        return MachineFixes.objects.filter(machine__pk= machine_pk)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -108,7 +108,7 @@ class MachineFixesListView(ListView):
     
 class MachineFixesCreateView(CreateView):
     template_name = 'database/create_fix.html'
-    model = MachineHistory
+    model = MachineFixes
     form_class = MachineFixesForm
     
     def form_valid(self, form):
@@ -127,9 +127,9 @@ class MachineFixesCreateView(CreateView):
 
 class MachineFixesDetailView(DetailView):
     template_name = 'database/fix_detail.html'
-    model = MachineHistory
+    model = MachineFixes
     context_object_name = 'fix'
     
     def get_object(self):
         fix_pk = self.kwargs.get('fix_pk')
-        return get_object_or_404(MachineHistory, pk=fix_pk)
+        return get_object_or_404(MachineFixes, pk=fix_pk)

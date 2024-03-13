@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from base.models import Profile, User, Task, MachineDatabase, MachineHistory
+from base.models import Profile, User, Task, MachineDatabase, MachineModifications, MachineFixes, MachineChanges
 
 
 class UserForm(UserCreationForm):
@@ -28,19 +28,19 @@ class MachineCreateForm(forms.ModelForm):
 
 class MachineModificationForm(forms.ModelForm):
     class Meta:
-        model = MachineHistory
+        model = MachineModifications
         fields = ['name','modification', 'photos']
 
 
 class MachineChangesForm(forms.ModelForm):
     name = forms.ModelChoiceField(queryset=MachineDatabase.objects.all(), empty_label=None)
     class Meta:
-        model = MachineHistory
+        model = MachineChanges
         fields = ['changes', 'photos']
 
 
 class MachineFixesForm(forms.ModelForm):
     class Meta:
-        model = MachineHistory
+        model = MachineFixes
         fields = ['name', 'fixes', 'photos']
 
