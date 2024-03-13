@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+  <h1>Lista Napraw na maszynie</h1>
+  
+  {% if machine %}
+    <p><a href="{% url 'database:create_change' pk=machine.pk %}">Create Change</a></p>
+  {% endif %}
+  
+  {% for change in changes %}
+    <ul>
+      <li>
+        <a href="{% url 'database:change_detail' pk=machine.pk change_pk=change.pk %}">
+          {{ change.name }} -- {{ change.author }} -- {{ change.time }}
+        </a>        
+      </li>
+    </ul>
+{% empty %}
+    <p>Nie ma żadnych zmian do wyświetlenia</p>
+{% endfor %}
+
+{% endblock %}

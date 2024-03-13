@@ -16,8 +16,8 @@ urlpatterns = [
     path('machine_detail/<int:pk>/create_fix/', MachineFixesCreateView.as_view(), name='create_fix'),
     path('machine_detail/<int:pk>/fix_detail/<int:fix_pk>/', MachineFixesDetailView.as_view(), name='fix_detail'),
     
-    path('machine_detail/<int:pk>/changes_list/', MachineFixesListView.as_view(), name='changes_list'),
-    path('machine_detail/<int:pk>/create_change/', MachineFixesCreateView.as_view(), name='create_change'),
-    path('machine_detail/<int:pk>/change_detail/<int:change_pk>/', MachineFixesDetailView.as_view(), name='change_detail'),
+    path('machine_detail/<int:pk>/changes_list/', MachineChangesListView.as_view(), name='changes_list'),
+    path('machine_detail/<int:pk>/create_change/', MachineChangesCreateView.as_view(), name='create_change'),
+    path('machine_detail/<int:pk>/change_detail/<int:change_pk>/', MachineChangesDetailView.as_view(), name='change_detail'),
 
 ]

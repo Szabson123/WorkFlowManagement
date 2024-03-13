@@ -145,7 +145,7 @@ class MachineChangesListView(ListView):
         pk = self.kwargs.get('pk')
         machine = get_object_or_404(MachineDatabase, pk=pk)
         context['machine'] = machine
-        return machine
+        return context
     
     def get_queryset(self):
         machine_pk = self.kwargs.get('pk')
@@ -155,6 +155,7 @@ class MachineChangesListView(ListView):
 class MachineChangesCreateView(CreateView):
     template_name = 'database/create_change.html'
     model = MachineChanges
+    form_class = MachineChangesForm
     
     def form_valid(self, form):
         machine_pk = self.kwargs.get('pk')
