@@ -11,7 +11,7 @@
     <ul>
       <li>
         <a href="{% url 'database:modyfication_detail' pk=machine.pk modyfication_pk=modyfication.pk %}">
-          {{ modyfication.name }} -- {{ modyfication.author }} -- {{ modyfication.time }}
+          {{ modyfication.name }} -- {{ modyfication.author.get_full_name }} -- {{ modyfication.time }}
         </a>        
       </li>
     </ul>

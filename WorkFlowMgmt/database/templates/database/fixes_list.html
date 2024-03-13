@@ -11,7 +11,7 @@
     <ul>
       <li>
         <a href="{% url 'database:fix_detail' pk=machine.pk fix_pk=fix.pk %}">
-          {{ fix.name }} -- {{ fix.author }} -- {{ fix.time }}
+          {{ fix.name }} -- {{ fix.author.get_full_name }} -- {{ fix.time }}
         </a>        
       </li>
     </ul>

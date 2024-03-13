@@ -11,8 +11,8 @@
     <ul>
       <li>
         <a href="{% url 'database:change_detail' pk=machine.pk change_pk=change.pk %}">
-          {{ change.name }} -- {{ change.author }} -- {{ change.time }}
-        </a>        
+            {{ change.name }} -- {{ change.author.get_full_name }} -- {{ change.time }}
+          </a>      
       </li>
     </ul>
 {% empty %}
