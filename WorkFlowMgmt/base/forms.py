@@ -40,8 +40,7 @@ class MachineChangesForm(forms.ModelForm):
 
 
 class MachineFixesForm(forms.ModelForm):
-    name = forms.ModelChoiceField(queryset=MachineDatabase.objects.all(), empty_label=None)
     class Meta:
         model = MachineHistory
-        fields = ['fixes', 'photos']
+        fields = ['name', 'fixes', 'photos']
 

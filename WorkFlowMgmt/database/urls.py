@@ -12,7 +12,7 @@ urlpatterns = [
     path('machine_detail/<int:pk>/create_modyfication/', MachineModificationCreateView.as_view(), name='create_modyfications'),
     path('machine_detail/<int:pk>/modyfication_detail/<int:modyfication_pk>/', MachineModyficationDetailView.as_view(), name='modyfication_detail'),
     
-    path('machine_detail/<int:pk>/fix_list/', MachineFixesListView.as_view(), name='fix_list'),
+    path('machine_detail/<int:pk>/fix_list/', MachineFixesListView.as_view(), name='fixes_list'),
     path('machine_detail/<int:pk>/create_fix/', MachineFixesCreateView.as_view(), name='create_fix'),
     path('machine_detail/<int:pk>/fix_detail/<int:fix_pk>/', MachineFixesDetailView.as_view(), name='fix_detail'),
 

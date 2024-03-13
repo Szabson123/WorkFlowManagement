@@ -90,7 +90,7 @@ class MachineModyficationDetailView(DetailView):
     
     
 class MachineFixesListView(ListView):
-    template_name = 'database/fixes_list'
+    template_name = 'database/fixes_list.html'
     model = MachineHistory
     context_object_name = 'fixes'
     
@@ -107,27 +107,28 @@ class MachineFixesListView(ListView):
     
     
 class MachineFixesCreateView(CreateView):
-    template_name = 'database/create_fix'
+    template_name = 'database/create_fix.html'
     model = MachineHistory
+    form_class = MachineFixesForm
     
     def form_valid(self, form):
         machine_pk = self.kwargs.get('pk')
-        machine = get_object_or_404(MachineHistory, pk=machine_pk)
+        machine = get_object_or_404(MachineDatabase, pk=machine_pk)
         
         form.instance.author = self.request.user
-        form.instace.time = timezone.now()
+        form.instance.time = timezone.now()
         form.instance.machine = machine
         
         return super().form_valid(form)
     
     def get_success_url(self) -> str:
-        return reverse('dataabse:database')
+        return reverse('database:database')
     
 
 class MachineFixesDetailView(DetailView):
-    template_name = 'database/fix_detail'
+    template_name = 'database/fix_detail.html'
     model = MachineHistory
-    contex_object_name = 'fixes'
+    context_object_name = 'fix'
     
     def get_object(self):
         fix_pk = self.kwargs.get('fix_pk')
