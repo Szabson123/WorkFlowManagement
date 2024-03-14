@@ -9,6 +9,10 @@ PRIORITY_CHOICES = (
     ('3', 'Niski'),
 )
 
+TYPE_CHOICES = (
+    ('0', 'Awaria'),
+    ('1', 'Przezbrojenie'),
+)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -48,7 +52,7 @@ class MachineModifications(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     time = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
-    photos = models.ImageField(blank=True, null=True, upload_to='modification_images/')
+    photos = models.ImageField(blank=True, null=True, upload_to='modifications_images/')
     modification = models.TextField(blank=True, null=True)
     
     def __str__(self):
@@ -60,7 +64,7 @@ class MachineFixes(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     time = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
-    photos = models.ImageField(blank=True, null=True, upload_to='machine_images/')
+    photos = models.ImageField(blank=True, null=True, upload_to='fixes_images/')
     fixes = models.TextField(blank=True, null=True)
     
     def __str__(self):
@@ -77,3 +81,21 @@ class MachineChanges(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+    
+    
+class Issue(models.Model):
+    author = models.OneToOneField(User, related_name='authored_issues', on_delete=models.CASCADE)
+    accepted_by = models.OneToOneField(User, related_name='accepted_issues', on_delete=models.CASCADE)
+    upload_date = models.DateTimeField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    line = models.CharField(max_length=255)
+    machine = models.ForeignKey(MachineDatabase, on_delete=models.CASCADE)
+    priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default='0')
+    type_of_issue = models.CharField(max_length=1, choices=TYPE_CHOICES, blank=True, null=True)
+    
+    def __str__(self):
+        return f'{self.title}'
