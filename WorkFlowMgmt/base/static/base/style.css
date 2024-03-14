@@ -1,0 +1,15 @@
+table.table .priority-high {
+    background-color: #ffcccc !important; /* Jasnoczerwony */
+}
+.priority-medium {
+    background-color: #ffecb3 !important; /* Jasnopomarańczowy */
+}
+
+.priority-low {
+    background-color: #ffffcc !important; /* Jasnożółty */
+}
+
+.priority-none {
+    background-color: #f0f0f0 !important; /* Bardzo jasnoszary */
+}
+

@@ -1,15 +1,40 @@
 {% extends 'base/base.html' %}
 {% block content %}
 
-<p><a href="{% url 'issues:create_issue' %}">Dodaj Awarie</a></p>
+<div class="container mt-3">
+    <p><a class="btn btn-primary" href="{% url 'issues:create_issue' %}">Dodaj Awarie</a></p>
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>Data Dodania</th>
+                <th>Linia</th>
+                <th>Maszyna</th>
+                <th>Priorytet</th>
+                <th>Typ Awarii</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for issue in issues %}
+                {% with issue.priority as priority %}
+                <p>Debug Priority: {{ priority }}</p>
+                <tr class="{% if priority == '1' %}priority-high{% elif priority == '2' %}priority-medium{% elif priority == '3' %}priority-low{% elif priority == '0' %}priority-none{% endif %}">
 
-{% for issue in issues %}
-    <ul>
-        <li><a href="{% url 'issues:issue_detail' pk=issue.pk %}">{{issue.title}} -- {{issue.author.get_full_name}} -- {{issue.upload_date}} -- {{issue.line}} -- {{issue.machine}} -- {{ issue.get_priority_display }}
-             -- {{ issue.get_type_of_issue_display }}
-        </a></li>
-    </ul>
-{% endfor %}
+                        <td><a href="{% url 'issues:issue_detail' pk=issue.pk %}">{{ issue.title }}</a></td>
+                        <td>{{ issue.author.get_full_name }}</td>
+                        <td>{{ issue.upload_date }}</td>
+                        <td>{{ issue.line }}</td>
+                        <td>{{ issue.machine }}</td>
+                        <td>{{ issue.get_priority_display }}</td>
+                        <td>{{ issue.get_type_of_issue_display }}</td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<h1>Siema</h1>
 
 {% endblock %}
