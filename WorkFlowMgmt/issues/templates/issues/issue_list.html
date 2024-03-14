@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<p><a href="{% url 'issues:create_issue' %}">Dodaj Awarie</a></p>
+
+
+{% for issue in issues %}
+    <ul>
+        <li><a href="{% url 'issues:issue_detail' pk=issue.pk %}">{{issue.title}} -- {{issue.author.get_full_name}} -- {{issue.upload_date}} -- {{issue.line}} -- {{issue.machine}} -- {{ issue.get_priority_display }}
+             -- {{ issue.get_type_of_issue_display }}
+        </a></li>
+    </ul>
+{% endfor %}
+
+{% endblock %}

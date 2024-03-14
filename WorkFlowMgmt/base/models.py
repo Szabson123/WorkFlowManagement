@@ -84,11 +84,11 @@ class MachineChanges(models.Model):
     
     
 class Issue(models.Model):
-    author = models.OneToOneField(User, related_name='authored_issues', on_delete=models.CASCADE)
-    accepted_by = models.OneToOneField(User, related_name='accepted_issues', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name='authored_issues', on_delete=models.CASCADE)
+    accepted_by = models.ForeignKey(User, related_name='accepted_issues', on_delete=models.CASCADE, blank=True, null=True)
     upload_date = models.DateTimeField()
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
     
     title = models.CharField(max_length=255)
     description = models.TextField()

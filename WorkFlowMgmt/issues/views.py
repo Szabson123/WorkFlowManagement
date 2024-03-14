@@ -1,9 +1,9 @@
 from typing import Any
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from django.views.generic import ListView, DetailView, CreateView
-from datetime import timezone
+from django.utils import timezone
 
 from base.models import Issue
 from base.forms import IssueForm
@@ -28,6 +28,9 @@ class IssueCreateView(CreateView):
         form.instance.upload_date = timezone.now()
         
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('issues:issue_list')
 
 
 class IssueDetailView(DetailView):
