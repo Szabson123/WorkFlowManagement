@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from base.models import Profile, User, Task, MachineDatabase, MachineModifications, MachineFixes, MachineChanges
+from base.models import Profile, User, Task, MachineDatabase, MachineModifications, MachineFixes, MachineChanges, Issue
 
 
 class UserForm(UserCreationForm):
@@ -43,3 +43,9 @@ class MachineFixesForm(forms.ModelForm):
         model = MachineFixes
         fields = ['name', 'fixes', 'photos']
 
+
+class IssueForm(forms.ModelForm):
+    class Meta:
+        machine = forms.ModelChoiceField(queryset=MachineDatabase.objects.all(), empty_label=None)
+        model = Issue
+        fields = ['title', 'description', 'line', 'machine', 'priority', 'type_of_issue']
