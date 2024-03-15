@@ -1,5 +1,10 @@
-table.table .priority-high {
-    background-color: #ffcccc !important; /* Jasnoczerwony */
+:root {
+    --bs-table-bg: #ffffff; /* Ustawienie własnego koloru tła tabeli */
+    --bs-body-bg: #ffffff; /* Ustawienie własnego koloru tła ciała, jeśli potrzebne */
+}
+
+.my_custom_container .table .priority-high {
+    background-color: #ffcccc !important;
 }
 .priority-medium {
     background-color: #ffecb3 !important; /* Jasnopomarańczowy */

@@ -1,13 +1,12 @@
 from typing import Any
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.utils import timezone
 
 from base.models import Issue
 from base.forms import IssueForm
-
 
 class IssuesListView(ListView):
     template_name = 'issues/issue_list.html'
@@ -16,7 +15,20 @@ class IssuesListView(ListView):
     
     def get_queryset(self):
         return Issue.objects.all()
+    
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get('action')
+        issue_id = request.POST.get('issue_id')
+        issue = get_object_or_404(Issue, id=issue_id)
+        
+        if action == 'accept':
+            issue.accepted_by = request.user
+            issue.start_date = timezone.now() 
+        elif action == 'complete':
+            issue.end_date = timezone.now() 
 
+        issue.save()
+        return redirect('issues:issue_list')
 
 class IssueCreateView(CreateView):
     template_name = 'issues/create_issue.html'
