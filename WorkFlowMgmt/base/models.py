@@ -99,3 +99,9 @@ class Issue(models.Model):
     
     def __str__(self):
         return f'{self.title}'
+
+
+class Forum(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(blank=True, null=True, upload_to='forum_images/')
