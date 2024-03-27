@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from base.models import Profile, User, Task, MachineDatabase, MachineModifications, MachineFixes, MachineChanges, Issue
+from base.models import Profile, User, Task, MachineDatabase, MachineModifications, MachineFixes, MachineChanges, Issue, Forum, Comments
 
 
 class UserForm(UserCreationForm):

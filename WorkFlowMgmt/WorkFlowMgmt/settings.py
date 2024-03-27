@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'profiles',
     'todo',
     'issues',
+    'forum',
 ]
 
 MIDDLEWARE = [
