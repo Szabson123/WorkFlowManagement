@@ -4,5 +4,5 @@ from forum.views import *
 app_name = 'forum'
 
 urlpatterns = [
-    path('', MainForumPage.as_view(), name='forum_main_page')
+    path('', MainForumPage.as_view(), name='forum')
 ]
