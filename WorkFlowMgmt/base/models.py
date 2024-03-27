@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 PRIORITY_CHOICES = (
@@ -104,4 +104,16 @@ class Issue(models.Model):
 class Forum(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
+    active = models.BooleanField(null=True)
     image = models.ImageField(blank=True, null=True, upload_to='forum_images/')
+    groups = models.ManyToManyField(Group, blank=True)
+    likes = models.IntegerField(default=0)
+    
+    def __str__(self) -> str:
+        return f'{self.name}' 
+    
+
+class Comments(models.Model):
+    name = models.ForeignKey(Forum, on_delete=models.CASCADE)
+    text = models.TextField()
+    
