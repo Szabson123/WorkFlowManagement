@@ -31,7 +31,7 @@ class Task(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField(null=True, blank=True)
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default='0')
-    assigned_to = models.ManyToManyField(User, related_name='assigned_tasks', null=True, blank=True)
+    assigned_to = models.ManyToManyField(User, related_name='assigned_tasks', blank=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -104,9 +104,12 @@ class Issue(models.Model):
 class Forum(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    active = models.BooleanField(null=True)
+    active = models.BooleanField(default=True)  
     image = models.ImageField(blank=True, null=True, upload_to='forum_images/')
     groups = models.ManyToManyField(Group, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    upload_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
     likes = models.IntegerField(default=0)
     
     def __str__(self) -> str:
