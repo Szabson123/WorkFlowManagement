@@ -3,7 +3,7 @@
 <p>Dodaj Post</p>
 <p>Moje Posty</p>
 <p>Wszystkie Posty</p>
-
+<p><a href="{% url 'forum:new_post' %}" class="btn btn-primary">Dodaj Post</a></p>
 {% for post in posts %}
 <ul>
     <li>{{ post.name }}</li>

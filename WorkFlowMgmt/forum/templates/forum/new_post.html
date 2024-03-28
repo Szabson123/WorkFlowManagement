@@ -1,0 +1,13 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <p></p>
+    <p>Nazwa: {{ form.name }}</p>
+    <p>Opis: {{ form.description }}</p>
+    <p>Zdjęcia: {{ form.image }}</p>
+    <p>Grupy: {{ form.groups }}</p>
+    <p>Tagi: {{ form.tag }}</p>
+    <label for="id_draft">Zapisz jako wersję roboczą:</label>
+    {{ form.draft }}
+    <button type="submit">Zapisz</button>
+</form>

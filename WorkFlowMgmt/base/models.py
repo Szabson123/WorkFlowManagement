@@ -101,9 +101,17 @@ class Issue(models.Model):
         return f'{self.title}'
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    
+    def __str__(self):
+        return self.name
+    
+
 class Forum(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
+    draft = models.BooleanField(default=False)
     active = models.BooleanField(default=True)  
     image = models.ImageField(blank=True, null=True, upload_to='forum_images/')
     groups = models.ManyToManyField(Group, blank=True)
@@ -111,6 +119,7 @@ class Forum(models.Model):
     upload_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
     likes = models.IntegerField(default=0)
+    tag = models.ManyToManyField(Tag, blank=True)
     
     def __str__(self) -> str:
         return f'{self.name}' 
@@ -119,4 +128,6 @@ class Forum(models.Model):
 class Comments(models.Model):
     name = models.ForeignKey(Forum, on_delete=models.CASCADE)
     text = models.TextField()
+    likes = models.IntegerField(default=0)
+    
     
