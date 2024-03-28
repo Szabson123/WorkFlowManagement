@@ -1,15 +1,25 @@
 {% extends "base/base.html" %}
 {% block content %}
-<p>Dodaj Post</p>
-<p><a href="{% url 'forum:new_post' %}" class="btn btn-primary">Dodaj Post</a></p>
-<p>Moje Posty:</p>
-<p><a href="{% url 'forum:my_posts' %}" class="btn btn-primary">Moje Posty</a></p>
-<p>Wszystkie Posty:</p>
-{% for post in posts %}
-<ul>
-    <li><a href="{% url 'forum:post_detail' pk=post.pk %}">{{ post.name }}</a></li>
-</ul>
-{% empty %}
-    <p>Nie ma żadnych wpisów</p>
-{% endfor %}
+<div class="container mt-4">
+    <div class="mb-3">
+        <a href="{% url 'forum:new_post' %}" class="btn btn-primary">Dodaj Post</a>
+        <a href="{% url 'forum:my_posts' %}" class="btn btn-secondary">Moje Posty</a>
+    </div>
+    <h2>Wszystkie Posty:</h2>
+    {% if posts %}
+        <div class="list-group">
+            {% for post in posts %}
+                <a href="{% url 'forum:post_detail' pk=post.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ post.name }}</h5>
+                    </div>
+                    <p class="mb-1">{{ post.description|truncatechars:100 }}</p>
+                    <small>Liczba komentarzy: {{ post.comments.count }}</small>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Nie ma żadnych wpisów.</p>
+    {% endif %}
+</div>
 {% endblock %}
