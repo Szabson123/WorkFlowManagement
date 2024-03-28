@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+{% block content %}
+
+<h3>Wersje Robocze</h3>
+{% for post in posts %}
+    {% if post.draft is True%}
+        <ul>
+            <li><a href="{% url 'forum:post_detail' pk=post.pk %}">{{ post.name }}</a></li>
+        </ul>
+    {% endif %}
+{% endfor %}
+<h3>Publiczne</h3>
+{% for post in posts %}
+    {% if post.draft is False%}
+        <ul>
+            <li><a href="{% url 'forum:post_detail' pk=post.pk %}">{{ post.name }}</a></li>
+        </ul>
+    {% endif %}
+{% endfor %}
+{% endblock %}

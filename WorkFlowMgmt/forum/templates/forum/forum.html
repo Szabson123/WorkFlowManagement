@@ -1,12 +1,13 @@
 {% extends "base/base.html" %}
 {% block content %}
 <p>Dodaj Post</p>
-<p>Moje Posty</p>
-<p>Wszystkie Posty</p>
 <p><a href="{% url 'forum:new_post' %}" class="btn btn-primary">Dodaj Post</a></p>
+<p>Moje Posty:</p>
+<p><a href="{% url 'forum:my_posts' %}" class="btn btn-primary">Moje Posty</a></p>
+<p>Wszystkie Posty:</p>
 {% for post in posts %}
 <ul>
-    <li>{{ post.name }}</li>
+    <li><a href="{% url 'forum:post_detail' pk=post.pk %}">{{ post.name }}</a></li>
 </ul>
 {% empty %}
     <p>Nie ma żadnych wpisów</p>
